@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>機械チェックシート</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>機械チェックシート</h1>
+        <div class="qr-section">
+            <div class="qr-code">
+                <img src="data:image/png;base64,{{ qr_code }}" alt="QRコード">
+                <p>携帯でスキャンしてアクセス</p>
+            </div>
+            <div class="url-info">
+                <p><strong>アクセスURL:</strong></p>
+                <p class="url-text">{{ current_url }}</p>
+            </div>
+        </div>
+        <div class="actions">
+            <a href="/create" class="btn btn-primary">新規チェックシート作成</a>
+            <a href="/records" class="btn btn-info">記録一覧</a>
+        </div>
+        <div id="checksheet-list">
+            <h2>既存のチェックシート</h2>
+            <div id="list-content"></div>
+        </div>
+    </div>
+    <script src="/static/js/index.js"></script>
+</body>
+</html>

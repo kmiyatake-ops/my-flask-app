@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>チェック記録一覧</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>チェック記録一覧</h1>
+        <div class="records-filter">
+            <label for="order-number-filter">発注番号で絞り込み:</label>
+            <input type="text" id="order-number-filter" placeholder="発注番号を入力">
+            <button id="filter-btn" class="btn btn-primary">絞り込み</button>
+            <button id="clear-filter-btn" class="btn btn-secondary">クリア</button>
+        </div>
+        <div id="records-list"></div>
+        <div class="actions">
+            <a href="/" class="btn btn-secondary">トップに戻る</a>
+        </div>
+    </div>
+    <script src="/static/js/records.js"></script>
+</body>
+</html>

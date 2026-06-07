@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ name }}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ name }}</h1>
+        <div class="order-number-section">
+            <label for="order-number-input">発注番号:</label>
+            <input type="text" id="order-number-input" value="{{ order_number }}" placeholder="発注番号を入力">
+            <label for="worker-input" style="margin-left: 20px;">作業者:</label>
+            <input type="text" id="worker-input" value="{{ worker | default('') }}" placeholder="作業者を入力">
+        </div>
+        <div class="image-container" id="image-container">
+            <img src="/uploads/{{ image_path }}" id="checksheet-image" alt="{{ name }}">
+            <div id="hotspots-layer"></div>
+        </div>
+        <div class="controls">
+            <button id="toggle-mode-btn" class="btn btn-primary">編集モード</button>
+            <button id="add-hotspot-btn" class="btn btn-success" style="display: none;">吹き出し追加</button>
+            <button id="save-btn" class="btn btn-success">保存</button>
+            <a href="/records" class="btn btn-info">記録一覧へ</a>
+            <a href="/" class="btn btn-secondary">戻る</a>
+        </div>
+        <div class="hotspot-list" id="hotspot-list"></div>
+    </div>
+    <script>
+        const checksheetId = {{ checksheet_id | tojson }};
+        const initialHotspots = {{ hotspots | tojson }};
+        const initialOrderNumber = {{ order_number | tojson }};
+        const initialWorker = {{ worker | tojson }};
+    </script>
+    <script src="/static/js/checksheet.js"></script>
+</body>
+</html>
