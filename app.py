@@ -3,7 +3,7 @@ import os
 import json
 from datetime import datetime
 import sqlite3
-import qrcode
+import segno
 from io import BytesIO
 import base64
 
@@ -82,14 +82,11 @@ def index():
     url = f"http://{host}"
     
     # QRコードを生E
-    qr = qrcode.QRCode(version=1, box_size=10, border=5)
-    qr.add_data(url)
-    qr.make(fit=True)
-    img = qr.make_image(fill_color="black", back_color="white")
+    qr = segno.make(url)
     
     # 画像をbase64エンコーチE
     buffered = BytesIO()
-    img.save(buffered, format="PNG")
+    qr.save(buffered, kind='png', scale=10)
     img_str = base64.b64encode(buffered.getvalue()).decode()
     
     return render_template('index.html', qr_code=img_str, current_url=url)
