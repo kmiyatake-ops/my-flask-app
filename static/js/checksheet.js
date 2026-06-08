@@ -181,7 +181,21 @@ function renderHotspots() {
         const listItem = document.createElement('div');
         listItem.className = 'hotspot-item';
         const deleteButton = isEditMode ? `<button class="delete-btn" onclick="deleteHotspot(${hotspot.id})">削除</button>` : '';
-        listItem.innerHTML = `
+        
+        // チェックボックスをリストにも追加
+        const listCheckbox = document.createElement('input');
+        listCheckbox.type = 'checkbox';
+        listCheckbox.className = 'list-checkbox';
+        listCheckbox.checked = hotspotCheckStates[hotspot.id] || false;
+        listCheckbox.disabled = isEditMode; // 編集モードでは無効化
+        listCheckbox.addEventListener('change', (e) => {
+            if (!isEditMode) {
+                toggleHotspotCheck(hotspot.id);
+            }
+        });
+        
+        listItem.appendChild(listCheckbox);
+        listItem.innerHTML += `
             <div class="number">${index + 1}</div>
             <div class="text">${escapeHtml(hotspot.text)}</div>
             <div class="case-number">${escapeHtml(hotspot.case_number || '-')}</div>
