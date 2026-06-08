@@ -81,8 +81,10 @@ def index():
     host = request.host
     url = f"http://{host}"
     
-    # QRコードを生成
+    # QRコードを生E
     qr = segno.make(url)
+    
+    # 画像をbase64エンコーチE
     buffered = BytesIO()
     qr.save(buffered, kind='png', scale=10)
     img_str = base64.b64encode(buffered.getvalue()).decode()
