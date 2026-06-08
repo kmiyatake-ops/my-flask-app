@@ -3,9 +3,6 @@ import os
 import json
 from datetime import datetime
 import sqlite3
-import segno
-from io import BytesIO
-import base64
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
@@ -77,15 +74,11 @@ def init_db():
 
 @app.route('/')
 def index():
-    # 現在のサーバEのURLを取征E
+    # 現在のサーバーURLを取得
     host = request.host
     url = f"http://{host}"
     
-    # QRコードを生成（SVG形式）
-    qr = segno.make(url)
-    img_str = qr.svg_inline()
-    
-    return render_template('index.html', qr_code=img_str, current_url=url)
+    return render_template('index.html', current_url=url)
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():

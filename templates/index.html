@@ -9,16 +9,6 @@
 <body>
     <div class="container">
         <h1>機械チェックシート</h1>
-        <div class="qr-section">
-            <div class="qr-code">
-                <img src="data:image/png;base64,{{ qr_code }}" alt="QRコード">
-                <p>携帯でスキャンしてアクセス</p>
-            </div>
-            <div class="url-info">
-                <p><strong>アクセスURL:</strong></p>
-                <p class="url-text">{{ current_url }}</p>
-            </div>
-        </div>
         <div class="actions">
             <a href="/create" class="btn btn-primary">新規チェックシート作成</a>
             <a href="/records" class="btn btn-info">記録一覧</a>
