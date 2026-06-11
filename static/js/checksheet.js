@@ -132,6 +132,15 @@ function renderHotspots() {
         
         hotspotEl.appendChild(checkbox);
         
+        // チェックボックスの番号を追加
+        const checkboxNumber = document.createElement('span');
+        checkboxNumber.className = 'checkbox-number';
+        checkboxNumber.textContent = index + 1;
+        // チェックボックスの右側に番号を配置
+        checkboxNumber.style.left = `${checkboxX + 5}%`;
+        checkboxNumber.style.top = `${checkboxY}%`;
+        hotspotEl.appendChild(checkboxNumber);
+        
         // 番号表示
         const number = document.createElement('span');
         number.className = 'hotspot-number';

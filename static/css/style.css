@@ -280,6 +280,16 @@ h2 {
     accent-color: #667eea;
 }
 
+.checkbox-number {
+    position: absolute;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    pointer-events: none;
+    z-index: 11;
+    transform: translate(-50%, -50%);
+}
+
 .hotspot-number {
     font-size: 14px;
     pointer-events: none;
