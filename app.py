@@ -392,6 +392,50 @@ def delete_checksheet(id):
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
 
+@app.route('/api/checksheet/<int:id>', methods=['PUT'])
+def update_checksheet(id):
+    try:
+        data = request.json
+        name = data.get('name')
+        image = request.files.get('image') if 'image' in request.files else None
+        
+        conn = sqlite3.connect(app.config['DATABASE'])
+        cursor = conn.cursor()
+        
+        # 既存のチェックシート情報を取得
+        cursor.execute('SELECT image_path FROM checksheets WHERE id = ?', (id,))
+        checksheet = cursor.fetchone()
+        
+        if not checksheet:
+            conn.close()
+            return jsonify({'success': False, 'error': 'Checksheet not found'})
+        
+        # 名前が更新された場合
+        if name:
+            cursor.execute('UPDATE checksheets SET name = ? WHERE id = ?', (name, id))
+        
+        # 画像が更新された場合
+        if image:
+            # 古い画像を削除
+            old_image_path = checksheet[0]
+            if os.path.exists(old_image_path):
+                os.remove(old_image_path)
+            
+            # 新しい画像を保存
+            filename = f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_{image.filename}"
+            image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            image.save(image_path)
+            
+            cursor.execute('UPDATE checksheets SET image_path = ? WHERE id = ?', (filename, id))
+        
+        conn.commit()
+        conn.close()
+        
+        return jsonify({'success': True})
+        
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+
 if __name__ == '__main__':
     init_db()
     app.run(debug=True, host='0.0.0.0', port=5000)

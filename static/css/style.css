@@ -173,6 +173,15 @@ h2 {
     background: #138496;
 }
 
+.btn-warning {
+    background: #ffc107;
+    color: #333;
+}
+
+.btn-warning:hover {
+    background: #e0a800;
+}
+
 .form-group {
     margin-bottom: 20px;
 }

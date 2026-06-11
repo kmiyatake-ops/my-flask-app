@@ -12,6 +12,7 @@ const image = document.getElementById('checksheet-image');
 const hotspotsLayer = document.getElementById('hotspots-layer');
 const addHotspotBtn = document.getElementById('add-hotspot-btn');
 const saveBtn = document.getElementById('save-btn');
+const updateBtn = document.getElementById('update-btn');
 const hotspotList = document.getElementById('hotspot-list');
 const orderNumberInput = document.getElementById('order-number-input');
 const workerInput = document.getElementById('worker-input');
@@ -379,6 +380,41 @@ orderNumberInput.addEventListener('input', (e) => {
 // 作業者入力時のイベント
 workerInput.addEventListener('input', (e) => {
     worker = e.target.value;
+});
+
+// 更新ボタン
+updateBtn.addEventListener('click', async () => {
+    const newName = prompt('チェックシート名を入力してください:');
+    if (newName === null) return; // キャンセルされた場合
+    
+    if (!newName || newName.trim() === '') {
+        alert('名前を入力してください');
+        return;
+    }
+    
+    try {
+        const response = await fetch(`/api/checksheet/${checksheetId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: newName.trim()
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            alert('チェックシートを更新しました');
+            location.reload();
+        } else {
+            alert('更新に失敗しました: ' + (data.error || '不明なエラー'));
+        }
+    } catch (error) {
+        console.error('Error updating checksheet:', error);
+        alert('エラーが発生しました');
+    }
 });
 
 function escapeHtml(text) {
