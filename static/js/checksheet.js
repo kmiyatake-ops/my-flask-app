@@ -125,7 +125,7 @@ function renderHotspots() {
             e.stopPropagation();
             if (isEditMode && isAddMode) {
                 editHotspot(hotspot);
-            } else {
+            } else if (!isEditMode) {
                 toggleHotspotCheck(hotspot.id);
             }
         });
@@ -139,13 +139,6 @@ function renderHotspots() {
         hotspotEl.appendChild(number);
         
         hotspotEl.dataset.id = hotspot.id;
-        
-        // ホットスポットクリックでチェックを切り替え（編集モードでも動作）
-        hotspotEl.addEventListener('click', (e) => {
-            if (e.target === checkbox) return; // チェックボックスの場合は無視
-            if (isEditMode && isAddMode) return; // 編集モード+追加モードの場合は無視
-            toggleHotspotCheck(hotspot.id);
-        });
         
         // 編集モードでホットスポットをドラッグして移動できるようにする
         if (isEditMode) {
@@ -199,8 +192,11 @@ function renderHotspots() {
         listCheckbox.type = 'checkbox';
         listCheckbox.className = 'list-checkbox';
         listCheckbox.checked = hotspotCheckStates[hotspot.id] || false;
+        listCheckbox.disabled = isEditMode; // 編集モードでは無効化
         listCheckbox.addEventListener('change', (e) => {
-            toggleHotspotCheck(hotspot.id);
+            if (!isEditMode) {
+                toggleHotspotCheck(hotspot.id);
+            }
         });
         
         listItem.appendChild(listCheckbox);
