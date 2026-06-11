@@ -198,7 +198,6 @@ function renderHotspots() {
         listItem.innerHTML += `
             <div class="number">${index + 1}</div>
             <div class="text">${escapeHtml(hotspot.text)}</div>
-            <div class="case-number">${escapeHtml(hotspot.case_number || '-')}</div>
             ${deleteButton}
         `;
         hotspotList.appendChild(listItem);
@@ -234,14 +233,12 @@ image.addEventListener('click', (e) => {
     const y = ((e.clientY - rect.top) / rect.height) * 100;
     
     const text = prompt('吹き出しのテキストを入力:');
-    const caseNumber = prompt('案件番号を入力:');
     if (text) {
         hotspots.push({
             id: nextHotspotId++,
             x: x,
             y: y,
             text: text,
-            case_number: caseNumber || '',
             checkbox_x: 50,
             checkbox_y: 50
         });
@@ -252,14 +249,8 @@ image.addEventListener('click', (e) => {
 // ホットスポット編集
 function editHotspot(hotspot) {
     const newText = prompt('吹き出しのテキストを編集:', hotspot.text);
-    const newCaseNumber = prompt('案件番号を編集:', hotspot.case_number || '');
-    if (newText !== null || newCaseNumber !== null) {
-        if (newText !== null) {
-            hotspot.text = newText;
-        }
-        if (newCaseNumber !== null) {
-            hotspot.case_number = newCaseNumber || '';
-        }
+    if (newText !== null) {
+        hotspot.text = newText;
         renderHotspots();
     }
 }
