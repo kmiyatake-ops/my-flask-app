@@ -533,27 +533,98 @@ h2 {
         padding: 15px;
     }
     
+    body {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .order-number-section {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    
+    .order-number-section label {
+        margin-bottom: 5px;
+    }
+    
+    .order-number-section input {
+        min-width: auto;
+        width: 100%;
+    }
+    
     .controls {
         flex-direction: column;
+        gap: 8px;
     }
     
     .btn {
         width: 100%;
+        padding: 14px 20px;
+        font-size: 16px;
+    }
+    
+    .actions {
+        flex-direction: column;
+    }
+    
+    .image-container {
+        margin-bottom: 15px;
     }
     
     .hotspot {
-        width: 35px;
-        height: 35px;
+        width: 50px;
+        height: 50px;
         font-size: 14px;
+    }
+    
+    .hotspot-checkbox {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .hotspot-number {
+        font-size: 14px;
+        width: 20px;
+        height: 20px;
+        top: -8px;
+        right: -8px;
+    }
+    
+    .list-checkbox {
+        width: 28px;
+        height: 28px;
     }
     
     .hotspot-item {
         flex-wrap: wrap;
+        padding: 8px;
+        gap: 8px;
+    }
+    
+    .hotspot-item .number {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
+    
+    .hotspot-item .text {
+        font-size: 14px;
+        width: 100%;
     }
     
     .hotspot-case-number {
         width: 100%;
         min-width: auto;
+    }
+    
+    .hotspot-item .delete-btn {
+        width: 100%;
+        padding: 8px;
     }
     
     .qr-section {
@@ -573,5 +644,66 @@ h2 {
     
     .records-filter input {
         width: 100%;
+        min-width: auto;
+    }
+    
+    .records-table {
+        font-size: 12px;
+    }
+    
+    .records-table th,
+    .records-table td {
+        padding: 8px 4px;
+    }
+    
+    #list-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .checksheet-card {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 18px;
+    }
+    
+    .hotspot {
+        width: 45px;
+        height: 45px;
+        font-size: 12px;
+    }
+    
+    .hotspot-checkbox {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .hotspot-number {
+        font-size: 12px;
+        width: 18px;
+        height: 18px;
+    }
+    
+    .list-checkbox {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .hotspot-item .number {
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
+    }
+    
+    .btn {
+        padding: 12px 16px;
+        font-size: 14px;
     }
 }
