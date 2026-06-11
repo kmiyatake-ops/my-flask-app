@@ -44,6 +44,7 @@ function loadOrderNumberCheckStates() {
                 hotspotCheckStates[hotspot.id] = false;
             }
         });
+        
         // 作業者も初期化
         if (workerInput) {
             workerInput.value = worker;
@@ -139,6 +140,13 @@ function renderHotspots() {
         
         hotspotEl.dataset.id = hotspot.id;
         
+        // ホットスポットクリックでチェックを切り替え（編集モードでも動作）
+        hotspotEl.addEventListener('click', (e) => {
+            if (e.target === checkbox) return; // チェックボックスの場合は無視
+            if (isEditMode && isAddMode) return; // 編集モード+追加モードの場合は無視
+            toggleHotspotCheck(hotspot.id);
+        });
+        
         // 編集モードでホットスポットをドラッグして移動できるようにする
         if (isEditMode) {
             hotspotEl.addEventListener('mousedown', (e) => {
@@ -149,8 +157,10 @@ function renderHotspots() {
                 const initialX = hotspot.x;
                 const initialY = hotspot.y;
                 const imageRect = image.getBoundingClientRect();
+                let isDragging = false;
                 
                 const onMouseMove = (moveEvent) => {
+                    isDragging = true;
                     const deltaX = moveEvent.clientX - startX;
                     const deltaY = moveEvent.clientY - startY;
                     
@@ -167,7 +177,9 @@ function renderHotspots() {
                 const onMouseUp = () => {
                     document.removeEventListener('mousemove', onMouseMove);
                     document.removeEventListener('mouseup', onMouseUp);
-                    saveHotspots();
+                    if (isDragging) {
+                        saveHotspots();
+                    }
                 };
                 
                 document.addEventListener('mousemove', onMouseMove);
