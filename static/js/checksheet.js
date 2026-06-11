@@ -393,6 +393,26 @@ updateBtn.addEventListener('click', async () => {
     }
     
     try {
+        // まずホットスポットを保存
+        const hotspotsResponse = await fetch('/api/hotspots', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                checksheet_id: checksheetId,
+                hotspots: hotspots
+            })
+        });
+        
+        const hotspotsData = await hotspotsResponse.json();
+        
+        if (!hotspotsData.success) {
+            alert('ホットスポットの保存に失敗しました');
+            return;
+        }
+        
+        // 次にチェックシート名を更新
         const response = await fetch(`/api/checksheet/${checksheetId}`, {
             method: 'PUT',
             headers: {
