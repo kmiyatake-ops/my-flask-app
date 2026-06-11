@@ -264,12 +264,20 @@ h2 {
 }
 
 .hotspot-checkbox {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
     accent-color: white;
     position: absolute;
     z-index: 10;
+}
+
+.list-checkbox {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    margin-right: 15px;
+    accent-color: #667eea;
 }
 
 .hotspot-number {
