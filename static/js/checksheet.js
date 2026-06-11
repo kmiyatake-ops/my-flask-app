@@ -124,7 +124,7 @@ function renderHotspots() {
             e.stopPropagation();
             if (isEditMode && isAddMode) {
                 editHotspot(hotspot);
-            } else if (!isEditMode) {
+            } else {
                 toggleHotspotCheck(hotspot.id);
             }
         });
@@ -187,11 +187,8 @@ function renderHotspots() {
         listCheckbox.type = 'checkbox';
         listCheckbox.className = 'list-checkbox';
         listCheckbox.checked = hotspotCheckStates[hotspot.id] || false;
-        listCheckbox.disabled = isEditMode; // 編集モードでは無効化
         listCheckbox.addEventListener('change', (e) => {
-            if (!isEditMode) {
-                toggleHotspotCheck(hotspot.id);
-            }
+            toggleHotspotCheck(hotspot.id);
         });
         
         listItem.appendChild(listCheckbox);
