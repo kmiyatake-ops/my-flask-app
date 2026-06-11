@@ -221,6 +221,15 @@ h2 {
     max-width: 100%;
     border-radius: 8px;
     cursor: crosshair;
+    height: auto;
+}
+
+@media (min-width: 769px) {
+    .image-container img {
+        min-height: 600px;
+        max-height: 800px;
+        object-fit: contain;
+    }
 }
 
 #hotspots-layer {
